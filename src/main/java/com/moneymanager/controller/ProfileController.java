@@ -46,9 +46,4 @@ public class ProfileController {
                     "message", Objects.requireNonNull(exception.getMessage())));
         }
     }
-
-    /*@GetMapping("/test")
-    public String test() {
-        return "tested";
-    }*/
 }

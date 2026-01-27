@@ -30,7 +30,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
-            userEmail = jwtUtil.getUsernameFromToken(jwt);
+            try {
+                userEmail = jwtUtil.getUsernameFromToken(jwt);
+                System.out.println("JWT SUBJECT = " + userEmail);
+            } catch (Exception e) {
+                System.out.println("JWT PARSE FAILED: " + e.getMessage());
+            }
         }
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             var userDetails = userDetailsService.loadUserByUsername(userEmail);
